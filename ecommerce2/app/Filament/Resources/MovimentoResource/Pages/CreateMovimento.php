@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Movimentos\Pages;
+namespace App\Filament\Resources\MovimentoResource\Pages;
 
-use App\Filament\Admin\Resources\Movimentos\MovimentoResource;
-use Filament\Resources\Pages\CreateRecord;
 use App\Models\Produto;
-use Filament\Notifications\Notification;
-use Filament\Support\Actions\Concerns\InteractsWithActions\Halt;
+use App\Filament\Resources\MovimentoResource;
+use Filament\Actions;
+use Filament\Resources\Pages\CreateRecord;
 
 class CreateMovimento extends CreateRecord
 {
     protected static string $resource = MovimentoResource::class;
     //hook - Verificar se há estoque suficiente
+
     protected function beforeCreate(): void
     {
         $data = $this->data;
@@ -29,7 +29,6 @@ class CreateMovimento extends CreateRecord
             }
     }
 
-    //Criar HooK para diminuir o estoque do produto se der certo
     protected function afterCreate(): void
     {
         $movimento = $this->getRecord();
